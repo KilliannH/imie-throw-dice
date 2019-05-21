@@ -1,0 +1,23 @@
+<div class="container">
+
+    <div class="col-md-8 offset-4">
+        <div class="card" style="width: 18rem; padding-left: 20px; padding-right: 20px; padding-top: 20px;" ng-repeat="item in throws">
+            <div class="card-title"><h4> New Throw </h4></div>
+            <hr>
+        <p class="card-text">Number of dices <input style="display: inline-block; width: 100px; margin-left: 20px;" type="number" min="0" class="form-control" ng-model="newThrow.nb_dices"></p>
+        <p class="card-text">Number of faces <input style="display: inline-block; width: 100px; margin-left: 20px;" type="number" min="0" class="form-control" ng-model="newThrow.nb_faces"></p>
+        <button style="margin-bottom: 20px;" class="btn btn-primary">Get result</button>
+        </div>
+    </div>
+
+    <hr>
+    <div class="row">
+        <div class="card" style="width: 18rem;" ng-repeat="item in throws">
+            <div class="card-body">
+                <p class="card-text">Faces : {{item.nb_faces}}</p>
+                <p class="card-text">Dices : {{item.nb_dices}}</p>
+                <p class="card-text">Result : {{item.result}}</p>
+            </div>
+        </div>
+    </div>
+</div>

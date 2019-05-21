@@ -1,0 +1,7 @@
+package-lock.json
+/.idea/
+myenv
+node_modules
+/node_modules/
+bower_components
+/bower_components/
