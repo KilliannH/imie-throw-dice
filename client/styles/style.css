@@ -1,7 +1,34 @@
+body {
+    background: whitesmoke;
+}
+
 .blue {
     color: #00ccff;
 }
 
+.red {
+    color: #D4000C;
+}
+
 .under_the_nav {
     margin-top: 70px;
+}
+
+.btn-primary {
+    background-color: #00ccff;
+    border-color: #00ccff;
+}
+
+.btn-primary:hover {
+    background-color: #00C1EE;
+    border-color: #00C1EE;
+}
+
+.clear-panel-btn {
+    position: absolute; top: 4px; right: 6px; color: gray;
+}
+
+.clear-panel-btn:hover {
+    position: absolute; top: 4px; right: 6px; color: rgb(40, 40, 40); cursor: pointer;
+    transition: .2s;
 }

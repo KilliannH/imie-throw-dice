@@ -1,7 +1,7 @@
 'use strict';
 
-myApp.service('AuthenticationService', ['$http', '$rootScope',
-        function ($http, $rootScope) {
+myApp.service('AuthenticationService', ['$http', '$cookies', '$rootScope',
+        function ($http, $cookies, $rootScope) {
             var service = {};
 
             service.login = function (email, password) {
@@ -19,11 +19,13 @@ myApp.service('AuthenticationService', ['$http', '$rootScope',
                 };
 
                 $http.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+                $cookies.putObject('globals', $rootScope.globals);
             };
 
             service.clearCredentials = function () {
                 $rootScope.globals = {};
                 $http.defaults.headers.common.Authorization = 'Bearer ';
+                $cookies.remove('globals');
             };
 
             return service;

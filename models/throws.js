@@ -17,13 +17,24 @@ sequelize
 const Throws = sequelize.define('throws', {
 
     nb_faces: {
-        type: Sequelize.BIGINT
+        type: Sequelize.BIGINT,
+        allowNull: false,
     },
     nb_dices: {
-        type: Sequelize.BIGINT
+        type: Sequelize.BIGINT,
+        allowNull: false,
+    },
+    result: {
+        type: Sequelize.DOUBLE,
+        allowNull: false,
+    },
+    dices_face: {
+        type: Array(Sequelize.BIGINT),
+        allowNull: false,
     },
     thrown_by: {
-        type: Sequelize.TEXT
+        type: Sequelize.TEXT,
+        allowNull: false,
     },
     date: {
         type: Sequelize.BIGINT

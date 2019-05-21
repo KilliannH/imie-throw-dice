@@ -108,9 +108,10 @@ router.post('/throws/', function (req, res) {
     Throws.create({
         nb_faces: req.body.nb_faces,
         nb_dices: req.body.nb_dices,
+        result: req.body.result,
+        dices_face: req.body.dices_face,
         thrown_by: req.body.thrown_by,
         date: req.body.date
-
     }).then((newThrow) => res.json(newThrow))
 });
 
@@ -127,6 +128,8 @@ router.put('/api/throws/:id', authCheck, function (req, res) {
             data.updateAttributes({
                 nb_faces: req.body.nb_faces,
                 nb_dices: req.body.nb_dices,
+                result: req.body.result,
+                dices_face: req.body.dices_face,
                 thrown_by: req.body.thrown_by,
                 date: req.body.date
 
