@@ -20,6 +20,10 @@ myApp.config(['$routeProvider', function($routeProvider){
             templateUrl: 'views/editThrow.html',
             controller: 'CrudThrowController'
         })
+        .when('/login', {
+            templateUrl: 'views/login.html',
+            controller: 'AuthController'
+        })
         .otherwise({
             redirecTo: '/'
         });
