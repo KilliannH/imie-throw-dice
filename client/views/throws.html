@@ -3,7 +3,6 @@
     <div class="col-md-8 offset-4">
         <div class="card" style="width: 18rem; padding-left: 20px; padding-right: 20px; padding-top: 20px;" ng-repeat="item in throws">
             <div class="card-title"><h4> New Throw </h4></div>
-            <img src="https://aruzegaming.com/wp-content/uploads/2016/04/Red-Dice-Wild-Deluxe_CHARACTER.png" alt="red dices" width="80" style="position: absolute; top: 3px; right: 20px;">
             <hr>
         <p class="card-text">Number of dices <input style="display: inline-block; width: 100px; margin-left: 20px;" type="number" min="0" class="form-control" ng-model="newThrow.nb_dices"></p>
         <p class="card-text">Number of faces <input style="display: inline-block; width: 100px; margin-left: 20px;" type="number" min="0" class="form-control" ng-model="newThrow.nb_faces"></p>
@@ -18,7 +17,7 @@
             <div class="card-body">
                 <p class="card-text">Faces : {{item.nb_faces}}</p>
                 <p class="card-text">Dices : {{item.nb_dices}}</p>
-                <p class="card-text">Result : <span class="red">{{item.result}}</span></p>
+                <p class="card-text">Result : <span class="text-primary">{{item.result}}</span></p>
             </div>
         </div>
     </div>
