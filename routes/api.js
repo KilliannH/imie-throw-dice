@@ -22,7 +22,7 @@ router.post('/users/signUp', (req, res) => {
             return res.status(409)
             //error 409 means conflict, 422 means process issues.
             //Use wathever you want.
-                .json({message: 'username already exist'});
+                .json({message: 'email already exist'});
         } else {
             bcrypt.hash(req.body.password, 10, (err, hash) => {
                 if(err) {
