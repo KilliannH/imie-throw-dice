@@ -28,6 +28,7 @@ router.post('/users/signUp', (req, res) => {
                 if(err) {
                     return res.status(500).json({error: err});
                 } else {
+                    console.log(hash);
                     Users.create({
                         email: req.body.email,
                         password: hash

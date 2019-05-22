@@ -105,6 +105,7 @@ if you run the app for the first time, you need to create your database :
 
 python3 main.py imie-throw-dice-db
 
+NB : by default, a user admin with password admin is created for tests.
 when the script is finished, you can run nodemon
 
 go to your repository, run : nodemon
