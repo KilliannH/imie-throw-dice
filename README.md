@@ -52,7 +52,7 @@ make sure you have python installed in your machine by running : python3
 a python3 shell will run with the version installed.
 If you have 'python3 command not found', it means that python3 is not installed in your machine.
 
-**** if you DON'T HAVE PYTHON3 INSTALLED ****
+**** iN CASE YOU DON'T HAVE PYTHON3 INSTALLED ****
 run those commands to install python3 :
 
 sudo apt get update
@@ -100,6 +100,15 @@ if you have a 'pip3 command not found' error, just run : sudo apt install python
 
 
 ---- Usage -------------
+
+---- Tests -------------
+you just have to run :
+npm test
+you'll be prompt to set a number of dice & faces.
+NB: a timeout of 15s has been set for you to fill thoes fields.
+If you wait too much, the test will fail. See : the test cmmand in your package.json
+
+
 if you run the app for the first time, you need to create your database :
 (assuming your postgres password is postgres, and your postgres host is localhost)
 
