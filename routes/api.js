@@ -33,7 +33,7 @@ router.post('/users/signUp', (req, res) => {
                         email: req.body.email,
                         password: hash
 
-                    }).then((user) => res.json(user))
+                    }).then((user) => res.json(user));
                 }
             });
         }
