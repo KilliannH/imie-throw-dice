@@ -1,13 +1,17 @@
-var assert = require('assert');
-describe('Math', function() {
-    describe('Test1', function() {
-        it('should return 3*3', function() {
-            assert.equal(3*3, 9);
+
+var expect = require('chai').expect;
+
+describe('Throws', function() {
+    let numberOfDice = 2;
+    let numberOfFaces = 2;
+    describe('Number of dice not null', function() {
+        it('should return an error if number of dice is less or equal to 0', function() {
+            expect(numberOfDice).to.be.at.least(1);
         });
     });
-    describe('Test2', function() {
-        it('should return (3-4) * 8', function() {
-            assert.equal((3-4) * 8, -8);
+    describe('Number of faces not null', function() {
+        it('should return an error if number of faces is less or equal to 0', function() {
+            expect(numberOfFaces).to.be.at.least(1);
         });
     });
 });

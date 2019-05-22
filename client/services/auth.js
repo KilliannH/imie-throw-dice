@@ -10,6 +10,10 @@ myApp.service('AuthenticationService', ['$http', '$cookies', '$rootScope',
 
             };
 
+            service.getCurrentUser = () => {
+                return $rootScope.globals.currentUser ? $rootScope.globals.currentUser.email : null;
+            };
+
             service.setCredentials = function (email, token) {
                 $rootScope.globals = {
                     currentUser: {

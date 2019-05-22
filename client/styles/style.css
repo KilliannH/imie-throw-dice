@@ -28,3 +28,9 @@ body {
     position: absolute; top: 4px; right: 6px; color: rgb(40, 40, 40); cursor: pointer;
     transition: .2s;
 }
+
+.login-card-item {
+    padding-left: 20px;
+    padding-top: 20px;
+    padding-right: 20px;
+}

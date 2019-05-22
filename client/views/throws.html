@@ -1,23 +1,25 @@
 <div class="container">
 
     <div class="col-md-8 offset-4">
-        <div class="card" style="width: 18rem; padding-left: 20px; padding-right: 20px; padding-top: 20px;" ng-repeat="item in throws">
+        <div class="card" style="width: 18rem; padding-left: 20px; padding-right: 20px; padding-top: 20px;">
             <div class="card-title"><h4> New Throw </h4></div>
             <hr>
         <p class="card-text">Number of dices <input style="display: inline-block; width: 100px; margin-left: 20px;" type="number" min="0" class="form-control" ng-model="newThrow.nb_dices"></p>
         <p class="card-text">Number of faces <input style="display: inline-block; width: 100px; margin-left: 20px;" type="number" min="0" class="form-control" ng-model="newThrow.nb_faces"></p>
-        <button style="margin-bottom: 20px;" class="btn btn-primary">Get result</button>
+        <button style="margin-bottom: 20px;" class="btn btn-primary" ng-click="createThrow()">Get result</button>
         </div>
     </div>
 
     <hr>
     <div class="row">
-        <div class="card" style="width: 18rem;" ng-repeat="item in throws">
-            <span class="fa fa-times clear-panel-btn"></span>
+        <div class="card" style="width: 18rem; margin-right: 20px;" ng-repeat="item in throws">
+            <span class="fa fa-times clear-panel-btn" ng-click="deleteThrow(item.id)"></span>
             <div class="card-body">
                 <p class="card-text">Faces : {{item.nb_faces}}</p>
                 <p class="card-text">Dices : {{item.nb_dices}}</p>
+                <p class="card-text">Face per dices : {{item.dices_face}}</p>
                 <p class="card-text">Result : <span class="text-primary">{{item.result}}</span></p>
+                <p class="card-text small" style="color: gray;">{{item.date | date: "dd/MM/yyyy"}} | {{item.thrown_by}}</p>
             </div>
         </div>
     </div>
