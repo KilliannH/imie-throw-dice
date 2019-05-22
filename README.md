@@ -99,18 +99,16 @@ pip3 install psycopg2
 if you have a 'pip3 command not found' error, just run : sudo apt install python3-pip
 
 
----- Usage -------------
-
 ---- Tests -------------
 you just have to run :
 npm test
 you'll be prompt to set a number of dice & faces.
-NB: a timeout of 15s has been set for you to fill thoes fields.
-If you wait too much, the test will fail. See : the test cmmand in your package.json
+NB: a timeout of 60s has been set for you to fill those fields.
+If you wait until this timeout, the test will fail. See more : test cmd in your package.json
 
-
+---- Usage -------------
 if you run the app for the first time, you need to create your database :
-(assuming your postgres password is postgres, and your postgres host is localhost)
+(assuming your postgres password, roleName is postgres, and your postgres host is localhost)
 
 python3 main.py imie-throw-dice-db
 
