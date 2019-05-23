@@ -45,3 +45,5 @@ If you don't specify anything, the default throw is : 1 dice with six faces.
 You can use the --sum option to see the sum directly
 
 
+TODO : let user specify wich type of throw he wants, if he wants to enable args or not,
+test if he choose the alternative throw : the number of dice should not be greater than the number of keeps.
