@@ -8,11 +8,20 @@ const rl = readline.createInterface({
 
 function askThrow() {
     return new Promise((resolve) => {
-        rl.question('Enter one or more throw with the synthax xdY : ', (data) => { resolve(data) })
+        rl.question('Enter one or more throw with the synthax XdY\n[optional] specify arguments with -- : ', (data) => { resolve(data) })
     })
 }
 
 let throws = [];
+let argSpliced = [];
+let args = {
+    verbose: false,
+    sum: false,
+    separated_values: false,
+    open: false,
+    advantage: false,
+    disadvantage: false
+};
 
 let fetchData = () => {
     return new Promise((resolve, reject) => {
@@ -25,6 +34,32 @@ let fetchData = () => {
                 if(data === '') {
                     console.log('no throw(s) specified, using the default one: 1d6.');
                     data = '1d6';
+                }
+
+                if(data.includes('--')) {
+                    argSpliced = data.split('--');
+
+                    for(let i = 0; i < argSpliced.length; i++) {
+                        if(argSpliced[i].includes(' ')) {
+                            argSpliced[i] = argSpliced[i].split(' ')[0];
+                        }
+                    }
+
+                    for(let i = 0; i < argSpliced.length; i++) {
+                        if(argSpliced[i] === 'verbose') {
+                            args.verbose = true;
+                        } else if(argSpliced[i] === 'sum') {
+                            args.sum = true;
+                        } else if(argSpliced[i] === 'separated-values') {
+                            args.separated_values = true;
+                        } else if(argSpliced[i] === 'open') {
+                            args.open = true;
+                        } else if(argSpliced[i] === 'advantage') {
+                            args.advantage = true;
+                        } else if(argSpliced[i] === 'disadvantage') {
+                            args.disadvantage = true;
+                        }
+                    }
                 }
 
                 if(data.includes(' ')) {
@@ -101,7 +136,7 @@ describe('Entries', function() {
 
 ///// FIRST CONSTRAINTS /////
 
-describe('Throws V1', function () {
+describe('Throws', function () {
      describe('Number of dice not null && not above 100', function () {
          it('should return a number > 0 and less or equal to 100', function () {
                  expect(throws[0].nb_dices).to.be.at.least(1);
@@ -129,4 +164,55 @@ describe('Throws V1', function () {
 });
 
 ///// SECOND CONSTRAINTS /////
+describe('Args', function () {
+    if(argSpliced.length === 0) {
+        describe('null found', function () {
+            it('args length should be equals to 0', function () {
+                expect(argSpliced).to.be.instanceOf(Array);
+                expect(argSpliced).to.have.lengthOf(0);
+            });
+        });
+    } else {
+        describe('verbose found', function () {
+            it('verbose should be true', function () {
+                expect(args).to.be.an('object');
+                expect(args.verbose).to.be.equals(true);
+            });
+        });
 
+        describe('sum found', function () {
+            it('sum should be true', function () {
+                expect(args).to.be.an('object');
+                expect(args.sum).to.be.equals(true);
+            });
+        });
+
+        describe('separated-values found', function () {
+            it('separated-values should be true', function () {
+                expect(args).to.be.an('object');
+                expect(args.separated_values).to.be.equals(true);
+            });
+        });
+
+        describe('open found', function () {
+            it('open should be true', function () {
+                expect(args).to.be.an('object');
+                expect(args.open).to.be.equals(true);
+            });
+        });
+
+        describe('advantage found', function () {
+            it('advantage should be true', function () {
+                expect(args).to.be.an('object');
+                expect(args.advantage).to.be.equals(true);
+            });
+        });
+
+        describe('disadvantage found', function () {
+            it('disadvantage should be true', function () {
+                expect(args).to.be.an('object');
+                expect(args.disadvantage).to.be.equals(true);
+            });
+        });
+    }
+});
