@@ -1,37 +1,50 @@
 var expect = require('chai').expect;
 const readline = require('readline');
 
-let numberOfDice , numberOfFaces;
-
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
 
-function askDice() {
+function askThrow() {
     return new Promise((resolve) => {
-        rl.question('Number of dice(s) ? ', (dices) => { resolve(dices) })
+        rl.question('Enter one or more throw with the synthax xdY : ', (data) => { resolve(data) })
     })
 }
 
-function askFace(dice) {
-    return new Promise((resolve) => {
-        rl.question('Number of face(s) ? ', (faces) => { resolve([dice, faces]) })
-    })
-}
+let throws = [];
 
 let fetchData = () => {
     return new Promise((resolve, reject) => {
-        return askDice().then((res) => {
-            askFace(res).then((res) => {
-                console.log(`You typed ${res[0]} dice(s) and ${res[1]} face(s).`);
-
-                numberOfDice = parseInt(res[0]);
-                numberOfFaces = parseInt(res[1]);
-
+        return askThrow().then((data) => {
+                console.log(`You typed : ${data}.`);
                 rl.close();
+
+                let throwSpliced = [];
+
+                if(data.includes(' ')) {
+                    throwSpliced = data.split(' ');
+
+                    for (let i = 0; i < throwSpliced.length; i++) {
+                        if (throwSpliced[i].includes('d')) {
+                            throws.push({
+                                nb_dices: parseInt(throwSpliced[i].split('d')[0]),
+                                nb_faces: parseInt(throwSpliced[i].split('d')[1])
+                            });
+                        }
+                    }
+                } else {
+                    if(data.includes('d')) {
+                        throws.push({
+                            nb_dices: parseInt(data.split('d')[0]),
+                            nb_faces: parseInt(data.split('d')[1])
+                        })
+                    }
+                }
+
+                console.log(throws);
+
                 resolve();
-            });
         });
     });
 };
@@ -45,11 +58,17 @@ before(() => {
  describe('Entries', function() {
      describe('Ensure inputs are integers', function () {
          it('should return an integer > 0', function () {
-             expect(numberOfDice).to.be.a('number');
-             expect(numberOfDice).to.be.above(0);
+             expect(throws).to.be.instanceOf(Array);
+             expect(throws).to.have.length.above(0);
 
-             expect(numberOfFaces).to.be.a('number');
-             expect(numberOfFaces).to.be.above(0);
+             for(let i = 0; i < throws.length; i++) {
+                 expect(throws[i]).to.be.an('object');
+                 expect(throws[i].nb_dices).to.be.a('number');
+                 expect(throws[i].nb_dices).to.be.above(0);
+
+                 expect(throws[i].nb_faces).to.be.a('number');
+                 expect(throws[i].nb_faces).to.be.above(0);
+             }
          });
      });
  });
@@ -57,34 +76,43 @@ before(() => {
  describe('Throws', function () {
      describe('Number of dice not null && not above 100', function () {
          it('should return a number > 0 and less or equal to 100', function () {
-             expect(numberOfDice).to.be.at.least(1);
-             expect(numberOfDice).not.to.be.above(100);
+             for(let i = 0; i < throws.length; i++) {
+                 expect(throws[i].nb_dices).to.be.at.least(1);
+                 expect(throws[i].nb_dices).not.to.be.above(100);
+             }
          });
      });
      describe('Number of faces between 2 and 100', function () {
          it('should return a number >= 2 && <= 100', function () {
-             expect(numberOfFaces).to.be.at.least(2);
-             expect(numberOfFaces).not.to.be.above(100);
+             for(let i = 0; i < throws.length; i++) {
+                 expect(throws[i].nb_faces).to.be.at.least(2);
+                 expect(throws[i].nb_faces).not.to.be.above(100);
+             }
          });
      });
      describe('The sum is equal to the addition of the faces from all dices', function () {
          it('should return a sum', function () {
-             let dicesface = [];
-             for (let i = 0; i < numberOfDice; i++) {
-                 var min = 1;
-                 var max = numberOfFaces + 1;
-                 var random = parseInt(Math.random() * (+max - +min) + +min);
 
-                 dicesface.push(random);
-             }
+             for (let i = 0; i < throws; i++) {
+                 let dicesface = [];
+                 for(let j = 0; j < throws[i].nb_dices; j++) {
+                     var min = 1;
+                     var max = throws[i].nb_faces + 1;
+                     var random = parseInt(Math.random() * (+max - +min) + +min);
+                     dicesface.push(random);
+                 }
 
-             let result = 0;
-             for (let i = 0; i < dicesface.length; i++) {
-                 result += dicesface[i];
+                let result = 0;
+                for (let j = 0; j < dicesface.length; j++) {
+                 result += dicesface[j];
+                }
+
+                throws[i].dices_face = dicesface;
+                throws[i].result = result;
+                 expect(max).to.be.a('number');
+                 expect(result).to.be.a('number');
              }
-             expect(numberOfDice).to.be.a('number');
-             expect(max).to.be.a('number');
-             expect(result).to.be.a('number');
+             expect(throws).to.be.an('array');
          });
      });
  });
