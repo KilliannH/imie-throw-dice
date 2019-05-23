@@ -29,7 +29,9 @@ let fetchData = () => {
                         if (throwSpliced[i].includes('d')) {
                             throws.push({
                                 nb_dices: parseInt(throwSpliced[i].split('d')[0]),
-                                nb_faces: parseInt(throwSpliced[i].split('d')[1])
+                                nb_faces: parseInt(throwSpliced[i].split('d')[1]),
+                                dices_face: [],
+                                result: 0
                             });
                         }
                     }
@@ -37,14 +39,33 @@ let fetchData = () => {
                     if(data.includes('d')) {
                         throws.push({
                             nb_dices: parseInt(data.split('d')[0]),
-                            nb_faces: parseInt(data.split('d')[1])
+                            nb_faces: parseInt(data.split('d')[1]),
+                            dices_face: [],
+                            result: 0
                         })
                     }
                 }
 
-                console.log(throws);
+            for (let i = 0; i < throws.length; i++) {
+                let dicesface = [];
+                for (let j = 0; j < throws[i].nb_dices; j++) {
+                    var min = 1;
+                    var max = throws[i].nb_faces + 1;
+                    expect(max).to.be.a('number');
+                    var random = parseInt(Math.random() * (+max - +min) + +min);
+                    dicesface.push(random);
+                }
 
-                resolve();
+                throws[i].dices_face = dicesface;
+
+                let result = 0;
+                for(let j = 0; j < throws[i].dices_face.length; j++) {
+                    result += throws[i].dices_face[j];
+                }
+                throws[i].result = result;
+            }
+
+            resolve();
         });
     });
 };
@@ -93,26 +114,14 @@ before(() => {
      describe('The sum is equal to the addition of the faces from all dices', function () {
          it('should return a sum', function () {
 
-             for (let i = 0; i < throws; i++) {
-                 let dicesface = [];
-                 for(let j = 0; j < throws[i].nb_dices; j++) {
-                     var min = 1;
-                     var max = throws[i].nb_faces + 1;
-                     var random = parseInt(Math.random() * (+max - +min) + +min);
-                     dicesface.push(random);
-                 }
-
-                let result = 0;
-                for (let j = 0; j < dicesface.length; j++) {
-                 result += dicesface[j];
-                }
-
-                throws[i].dices_face = dicesface;
-                throws[i].result = result;
-                 expect(max).to.be.a('number');
-                 expect(result).to.be.a('number');
-             }
              expect(throws).to.be.an('array');
+
+             for(let i = 0; i < throws.length; i++) {
+                 expect(throws[i].result).to.be.a('number');
+                 expect(throws[i].result).to.be.above(0);
+             }
+             console.log('results : ');
+             console.log(throws);
          });
      });
  });
