@@ -22,6 +22,10 @@ let fetchData = () => {
 
                 let throwSpliced = [];
 
+                if(data === '') {
+                    data = '1d6';
+                }
+
                 if(data.includes(' ')) {
                     throwSpliced = data.split(' ');
 
@@ -94,21 +98,19 @@ before(() => {
      });
  });
 
- describe('Throws', function () {
+///// FIRST CONSTRAINTS /////
+
+ describe('Throws V1', function () {
      describe('Number of dice not null && not above 100', function () {
          it('should return a number > 0 and less or equal to 100', function () {
-             for(let i = 0; i < throws.length; i++) {
-                 expect(throws[i].nb_dices).to.be.at.least(1);
-                 expect(throws[i].nb_dices).not.to.be.above(100);
-             }
+                 expect(throws[0].nb_dices).to.be.at.least(1);
+                 expect(throws[0].nb_dices).not.to.be.above(100);
          });
      });
      describe('Number of faces between 2 and 100', function () {
          it('should return a number >= 2 && <= 100', function () {
-             for(let i = 0; i < throws.length; i++) {
-                 expect(throws[i].nb_faces).to.be.at.least(2);
-                 expect(throws[i].nb_faces).not.to.be.above(100);
-             }
+                 expect(throws[0].nb_faces).to.be.at.least(2);
+                 expect(throws[0].nb_faces).not.to.be.above(100);
          });
      });
      describe('The sum is equal to the addition of the faces from all dices', function () {
@@ -116,12 +118,14 @@ before(() => {
 
              expect(throws).to.be.an('array');
 
-             for(let i = 0; i < throws.length; i++) {
-                 expect(throws[i].result).to.be.a('number');
-                 expect(throws[i].result).to.be.above(0);
-             }
+             expect(throws[0].result).to.be.a('number');
+             expect(throws[0].result).to.be.above(0);
+
              console.log('results : ');
              console.log(throws);
          });
      });
  });
+
+///// SECOND CONSTRAINTS /////
+
