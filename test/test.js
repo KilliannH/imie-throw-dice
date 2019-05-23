@@ -116,6 +116,21 @@ before(() => {
     });
 });
 
+after(() => {
+    console.log('results : ');
+    if(!args.sum) {
+        console.log(throws);
+    } else {
+        for(let i = 0; i < throws.length; i++) {
+            let sum = 0;
+            for(let j = 0; j < throws[i].nb_dices; j++) {
+                sum += throws[i].dices_face[j];
+                console.log('Throw n°' + i + 1 + ' : ' + sum);
+            }
+        }
+    }
+});
+
 describe('Entries', function() {
      describe('Ensure inputs are integers', function () {
          it('should return an integer > 0', function () {
@@ -156,9 +171,6 @@ describe('Throws', function () {
 
              expect(throws[0].result).to.be.a('number');
              expect(throws[0].result).to.be.above(0);
-
-             console.log('results : ');
-             console.log(throws);
          });
      });
 });
