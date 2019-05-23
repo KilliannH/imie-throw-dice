@@ -13,6 +13,8 @@ function askThrow() {
 }
 
 let throws = [];
+let throws_alt = [];
+
 let args = {
     verbose: false,
     sum: false,
@@ -87,6 +89,13 @@ let fetchData = () => {
                         dices_face: [],
                         result: 0
                     })
+                } else if(data.includes('k')) {
+                    throws_alt.push({
+                        nb_dices: parseInt(data.split('k')[0]),
+                        nb_keep: parseInt(data.split('k')[1]),
+                        nb_faces: 10,
+                        results: []
+                    })
                 }
             }
 
@@ -110,6 +119,26 @@ let fetchData = () => {
                 throws[i].result = result;
             }
 
+            // compute throws alt
+            for (let i = 0; i < throws_alt.length; i++) {
+                let results = [];
+                for (let j = 0; j < throws_alt[i].nb_dices; j++) {
+                    var min = 1;
+                    var max = throws_alt[i].nb_faces + 1;
+
+                    var random = parseInt(Math.random() * (+max - +min) + +min);
+                    results.push(random);
+                }
+
+                results = results.sort((a, b) => a < b ? 1 : -1);
+
+                throws_alt[i].results = [];
+
+                for(let j = 0; j < throws_alt[i].nb_keep; j++) {
+                    throws_alt[i].results.push(results[j]);
+                }
+            }
+
             resolve();
         });
     });
@@ -122,9 +151,13 @@ before(() => {
 });
 
 after(() => {
-    console.log('results : ');
+    console.log('**** results ****');
     if(!args.sum) {
+        console.log('- Throws');
         console.log(throws);
+        console.log('\n');
+        console.log('- Throws_alt');
+        console.log(throws_alt);
     } else {
         for(let i = 0; i < throws.length; i++) {
             let sum = 0;

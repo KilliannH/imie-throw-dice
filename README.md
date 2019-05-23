@@ -39,7 +39,8 @@ npm test
 you just have to run :
 npm test
 you'll be prompt to set a number of dice & faces. 
-If you don't specify any, the default throw is : 1 dice with six faces.
+NB: you have A minute to fill the input, see : package.json test command to change it.
+If you don't specify anything, the default throw is : 1 dice with six faces.
 
 You can use the --sum option to see the sum directly
 

@@ -4,7 +4,7 @@
   "description": "weekly school project to learn tests & software quality",
   "main": "app.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha --timeout 15000 --reporter spec"
+    "test": "./node_modules/.bin/mocha --timeout 60000 --reporter spec"
   },
   "dependencies": {
     "mocha": "^6.1.4"
