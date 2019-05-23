@@ -23,6 +23,7 @@ let fetchData = () => {
                 let throwSpliced = [];
 
                 if(data === '') {
+                    console.log('no throw(s) specified, using the default one: 1d6.');
                     data = '1d6';
                 }
 
@@ -80,7 +81,7 @@ before(() => {
     });
 });
 
- describe('Entries', function() {
+describe('Entries', function() {
      describe('Ensure inputs are integers', function () {
          it('should return an integer > 0', function () {
              expect(throws).to.be.instanceOf(Array);
@@ -96,11 +97,11 @@ before(() => {
              }
          });
      });
- });
+});
 
 ///// FIRST CONSTRAINTS /////
 
- describe('Throws V1', function () {
+describe('Throws V1', function () {
      describe('Number of dice not null && not above 100', function () {
          it('should return a number > 0 and less or equal to 100', function () {
                  expect(throws[0].nb_dices).to.be.at.least(1);
@@ -125,7 +126,7 @@ before(() => {
              console.log(throws);
          });
      });
- });
+});
 
 ///// SECOND CONSTRAINTS /////
 

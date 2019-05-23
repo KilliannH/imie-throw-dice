@@ -103,9 +103,7 @@ if you have a 'pip3 command not found' error, just run : sudo apt install python
 you just have to run :
 npm test
 you'll be prompt to set a number of dice & faces.
-NB: a timeout of 15s has been set for you to fill those fields.
-If you wait until this timeout, the test will set your throw to the default one : one dice with 6 faces.
-To setup the timeout, see more : test cmd in your package.json
+.If you don't specify any, the default throw is : 1 dice with six faces
 
 ---- Usage -------------
 if you run the app for the first time, you need to create your database :
