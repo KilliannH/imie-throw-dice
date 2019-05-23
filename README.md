@@ -38,7 +38,9 @@ npm test
 ---- Tests -------------
 you just have to run :
 npm test
-you'll be prompt to set a number of dice & faces.
-.If you don't specify any, the default throw is : 1 dice with six faces
+you'll be prompt to set a number of dice & faces. 
+If you don't specify any, the default throw is : 1 dice with six faces.
+
+You can use the --sum option to see the sum directly
 
 
