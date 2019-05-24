@@ -200,27 +200,24 @@ describe('Results', () => {
     });
 });
 
-describe('Entries', function() {
-     describe('Ensure inputs are integers', function () {
-         it('should return an integer > 0', function () {
-             expect(throws).to.be.instanceOf(Array);
-             expect(throws).to.have.length.above(0);
-
-             for(let i = 0; i < throws.length; i++) {
-                 expect(throws[i]).to.be.an('object');
-                 expect(throws[i].nb_dices).to.be.a('number');
-                 expect(throws[i].nb_dices).to.be.above(0);
-
-                 expect(throws[i].nb_faces).to.be.a('number');
-                 expect(throws[i].nb_faces).to.be.above(0);
-             }
-         });
-     });
-});
-
 ///// FIRST CONSTRAINTS /////
 
 describe('Throws', function () {
+    describe('Ensure inputs are integers', function () {
+        it('should return an integer > 0', function () {
+            expect(throws).to.be.instanceOf(Array);
+            expect(throws).to.have.length.above(0);
+
+            for(let i = 0; i < throws.length; i++) {
+                expect(throws[i]).to.be.an('object');
+                expect(throws[i].nb_dices).to.be.a('number');
+                expect(throws[i].nb_dices).to.be.above(0);
+
+                expect(throws[i].nb_faces).to.be.a('number');
+                expect(throws[i].nb_faces).to.be.above(0);
+            }
+        });
+    });
      describe('Number of dice not null and not above 100', function () {
          it('should return a number > 0 and less or equal to 100', function () {
                  expect(throws[0].nb_dices).to.be.at.least(1);
@@ -299,6 +296,21 @@ describe('Args', function () {
 ///// THIRD CONSTRAINTS /////
 
 describe('Throws_alt', function () {
+    describe('Ensure inputs are integers', function () {
+        it('should return an integer > 0', function () {
+            expect(throws_alt).to.be.instanceOf(Array);
+            expect(throws_alt).to.have.length.above(0);
+
+            for(let i = 0; i < throws.length; i++) {
+                expect(throws[i]).to.be.an('object');
+                expect(throws[i].nb_dices).to.be.a('number');
+                expect(throws[i].nb_dices).to.be.above(0);
+
+                expect(throws[i].nb_keep).to.be.a('number');
+                expect(throws[i].nb_keep).to.be.at.least(0);
+            }
+        });
+    });
     describe('Number of dices not null and not above 100', function () {
         it('should return a number > 0 and less or equal to 100', function () {
             expect(throws_alt[0].nb_dices).to.be.at.least(1);
