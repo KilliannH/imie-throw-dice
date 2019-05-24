@@ -1,6 +1,8 @@
 var expect = require('chai').expect;
 const readline = require('readline');
 
+const addContext = require('mochawesome/addContext');
+
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -109,10 +111,10 @@ let fetchData = () => {
             for (let i = 0; i < throws.length; i++) {
                 let dicesface = [];
                 for (let j = 0; j < throws[i].nb_dices; j++) {
-                    var min = 1;
-                    var max = throws[i].nb_faces + 1;
+                    let min = 1;
+                    let max = throws[i].nb_faces + 1;
                     expect(max).to.be.a('number');
-                    var random = parseInt(Math.random() * (+max - +min) + +min);
+                    let random = parseInt(Math.random() * (+max - +min) + +min);
                     dicesface.push(random);
                 }
 
@@ -129,10 +131,10 @@ let fetchData = () => {
             for (let i = 0; i < throws_alt.length; i++) {
                 let results = [];
                 for (let j = 0; j < throws_alt[i].nb_dices; j++) {
-                    var min = 1;
-                    var max = throws_alt[i].nb_faces + 1;
+                    let min = 1;
+                    let max = throws_alt[i].nb_faces + 1;
 
-                    var random = parseInt(Math.random() * (+max - +min) + +min);
+                    let random = parseInt(Math.random() * (+max - +min) + +min);
                     results.push(random);
                 }
 
@@ -187,6 +189,17 @@ after(() => {
     }
 });
 
+describe('Results', () => {
+    it('should return throws results', function () {
+        if(throws.length > 0) {
+            addContext(this, JSON.stringify(throws));
+        }
+        if(throws_alt.length > 0) {
+            addContext(this, JSON.stringify(throws_alt));
+        }
+    });
+});
+
 describe('Entries', function() {
      describe('Ensure inputs are integers', function () {
          it('should return an integer > 0', function () {
@@ -208,7 +221,7 @@ describe('Entries', function() {
 ///// FIRST CONSTRAINTS /////
 
 describe('Throws', function () {
-     describe('Number of dice not null && not above 100', function () {
+     describe('Number of dice not null and not above 100', function () {
          it('should return a number > 0 and less or equal to 100', function () {
                  expect(throws[0].nb_dices).to.be.at.least(1);
                  expect(throws[0].nb_dices).not.to.be.above(100);
@@ -286,7 +299,7 @@ describe('Args', function () {
 ///// THIRD CONSTRAINTS /////
 
 describe('Throws_alt', function () {
-    describe('Number of dices not null && not above 100', function () {
+    describe('Number of dices not null and not above 100', function () {
         it('should return a number > 0 and less or equal to 100', function () {
             expect(throws_alt[0].nb_dices).to.be.at.least(1);
             expect(throws_alt[0].nb_dices).not.to.be.above(100);

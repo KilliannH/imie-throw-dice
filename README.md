@@ -42,8 +42,11 @@ you'll be prompt to set a number of dice & faces.
 NB: you have A minute to fill the input, see : package.json test command to change it.
 If you don't specify anything, the default throw is : 1 dice with six faces.
 
-You can use the --sum option to see the sum directly
+You can use the --sum option to see the sum directly, --separated-values return you only the results in an array
 
+when the test is done, a spec is created at /test_report/throws_report.html
+
+just launch this file on a browser to see the generate spec.
 
 TODO : let user specify wich type of throw he wants, if he wants to enable args or not,
 test if he choose the alternative throw : the number of dice should not be greater than the number of keeps.
