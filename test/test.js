@@ -70,6 +70,12 @@ let fetchData = () => {
             if(data.includes(' ')) {
                 throwSpliced = data.split(' ');
 
+                for(let i = 0; i < throwSpliced.length; i++) {
+                    if(throwSpliced[i].includes('--')) {
+                        throwSpliced.splice(i, 1);
+                    }
+                }
+
                 for (let i = 0; i < throwSpliced.length; i++) {
                     if (throwSpliced[i].includes('d')) {
                         throws.push({
@@ -152,19 +158,31 @@ before(() => {
 
 after(() => {
     console.log('**** results ****');
-    if(!args.sum) {
-        console.log('- Throws');
-        console.log(throws);
-        console.log('\n');
-        console.log('- Throws_alt');
-        console.log(throws_alt);
-    } else {
+    if(!args.sum && !args.separated_values) {
+        if(throws.length > 0) {
+            console.log('- Throws');
+            console.log(throws);
+            console.log('\n');
+
+        }
+
+        if(throws_alt.length > 0) {
+            console.log('- Throws_alt');
+            console.log(throws_alt);
+        }
+
+    } else if(args.sum && !args.separated_values){
         for(let i = 0; i < throws.length; i++) {
             let sum = 0;
             for(let j = 0; j < throws[i].nb_dices; j++) {
                 sum += throws[i].dices_face[j];
                 console.log('Throw n°' + (i + 1) + ' : ' + sum);
             }
+        }
+    } else if(!args.sum && args.separated_values) {
+        console.log('- Throws');
+        for(let i = 0; i < throws.length; i++) {
+            console.log(throws[i].dices_face);
         }
     }
 });
@@ -263,4 +281,31 @@ describe('Args', function () {
            expect(args.disadvantage).to.be.equals(true);
        });
    });
+});
+
+///// THIRD CONSTRAINTS /////
+
+describe('Throws_alt', function () {
+    describe('Number of dices not null && not above 100', function () {
+        it('should return a number > 0 and less or equal to 100', function () {
+            expect(throws_alt[0].nb_dices).to.be.at.least(1);
+            expect(throws_alt[0].nb_dices).not.to.be.above(100);
+        });
+    });
+    describe('Number of keeps <= number of dices', function () {
+        it('should return a number <= number of dices', function () {
+            expect(throws_alt[0].nb_keep).to.be.at.least(0);
+            expect(throws_alt[0].nb_keep).not.to.be.above(throws_alt[0].nb_dices);
+        });
+    });
+    describe('The result is equal to the sum of the values kept', function () {
+        it('should return a sum', function () {
+
+            expect(throws_alt).to.be.instanceOf(Array);
+
+            expect(throws_alt[0].results).to.be.instanceOf(Array);
+            expect(throws_alt[0].results[0]).to.be.a('number');
+            expect(throws_alt[0].results[0]).to.be.above(0);
+        });
+    });
 });
