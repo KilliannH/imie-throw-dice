@@ -7,7 +7,7 @@
     "test": "./node_modules/.bin/mocha --timeout 60000 --reporter mochawesome --reporter-options reportDir=test_report,reportFilename=throws_report"
   },
   "dependencies": {
-    "mocha": "^6.1.4"
+    "mocha": "^10.2.0"
   },
   "author": "Killiann Hervagault",
   "license": "ISC",
